@@ -90,7 +90,7 @@ function lineTotal(line: OrderLine) {
   return line.price;
 }
 
-function orderTotal(lines: OrderLine) {
+function orderTotal(lines: OrderLine[]) {
   return lines.reduce((total, line) => total + lineTotal(line), 0);
 }
 
@@ -187,10 +187,10 @@ console.log(allergyCard(brownie));
 
 // TS: The compiler will reject the next line once kitchenTicket returns a
 //     Readonly<> type. Leave it commented out with a note explaining why.
-// kitchenTicket(brownie).name = "Something else";
+// kitchenTicket(brownie).name = "Something else"; // Note - Can't change the name because KitchenTicket is readonly
 
 // TS: Three more lines below are bugs that only the compiler can see. Once
 //     your types are in place, fix each one and note it in your commit message.
-console.log(describe(lunchCombo));
-console.log(updateItem(soup, { price: "7.00" }));
-console.log(firstMatch(menu, (i) => i.calories < 300));
+console.log(describe(soup)); // changed to a MenuItem, as lunchCombo is a ComboDeal
+console.log(updateItem(soup, { price: 7.00 })); // price was given as a string instead of a number, just removed the quotation marks
+console.log(firstMatch(menu, (i) => i.nutrition.calories < 300)); // Calories need to be accessed through nutrition
